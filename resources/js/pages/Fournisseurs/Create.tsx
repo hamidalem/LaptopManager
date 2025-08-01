@@ -2,7 +2,7 @@ import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 
-
+// Define the form data interface for the Fournisseur
 interface FournisseurForm {
     nom_fourn: string;
     num_tel_fourn: string;
@@ -23,13 +23,13 @@ export default function Create() {
 
     return (
         <AppLayout>
-            <Head title="Create Fournisseur" />
+            <Head title="Créer un fournisseur" />
 
             <div className="min-h-screen bg-gray-100 py-12"> {/* Modern page background */}
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden"> {/* Modern card design */}
                         <div className="p-8"> {/* Increased padding */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Fournisseur</h1> {/* Modern heading */}
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer un nouveau fournisseur</h1> {/* Modern heading */}
 
                             <form onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 gap-6 mt-4">
@@ -42,7 +42,7 @@ export default function Create() {
                                             type="text"
                                             value={data.nom_fourn}
                                             onChange={(e) => setData('nom_fourn', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             autoFocus
                                         />
                                         {errors.nom_fourn && (
@@ -59,7 +59,7 @@ export default function Create() {
                                             type="tel"
                                             value={data.num_tel_fourn}
                                             onChange={(e) => setData('num_tel_fourn', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                         />
                                         {errors.num_tel_fourn && (
                                             <p className="mt-2 text-sm text-red-600">{errors.num_tel_fourn}</p>
@@ -75,7 +75,7 @@ export default function Create() {
                                             type="text"
                                             value={data.adresse_fourn}
                                             onChange={(e) => setData('adresse_fourn', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                         />
                                         {errors.adresse_fourn && (
                                             <p className="mt-2 text-sm text-red-600">{errors.adresse_fourn}</p>
@@ -86,16 +86,16 @@ export default function Create() {
                                 <div className="flex items-center justify-end mt-8"> {/* Adjusted margin-top */}
                                     <Link
                                         href={route('fournisseurs.index')}
-                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
+                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
+                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Creating...' : 'Create Fournisseur'}
+                                        {processing ? 'Création en cours...' : 'Créer un fournisseur'}
                                     </button>
                                 </div>
                             </form>

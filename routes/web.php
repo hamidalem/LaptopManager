@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FactureArticleController;
 use App\Http\Controllers\FactureLaptopController;
 use App\Http\Controllers\FactureMenuController;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('auth/login');
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -22,6 +23,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
 
 
 Route::get('/facture', [FactureMenuController::class, 'index']);
@@ -40,6 +45,17 @@ Route::resource('facture-articles', FactureArticleController::class);
 Route::get('/articles/{id}/price', [FactureArticleController::class, 'getArticlePrice']);
 
 Route::resource('facture-reparations', FactureReparationController::class);
+
+
+
+Route::get('facture-laptops/{factureLaptop}/export-pdf', [FactureLaptopController::class, 'exportPdf'])
+    ->name('facture-laptops.export-pdf');
+
+Route::get('facture-articles/{factureArticle}/export-pdf', [FactureArticleController::class, 'exportPdf'])
+    ->name('facture-articles.export-pdf');
+
+Route::get('facture-reparations/{factureReparation}/export-pdf', [FactureReparationController::class, 'exportPdf'])
+    ->name('facture-reparations.export-pdf');
 
 
 require __DIR__.'/settings.php';

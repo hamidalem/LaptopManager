@@ -34,4 +34,6 @@ class FactureLaptop extends Model
     {
         return $this->belongsTo(Laptop::class, 'id_lap', 'id_lap');
     }
+
+
 }

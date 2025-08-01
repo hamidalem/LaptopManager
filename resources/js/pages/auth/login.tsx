@@ -1,4 +1,5 @@
-import { Head, useForm } from '@inertiajs/react';
+import React from 'react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
@@ -36,17 +37,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     return (
-        <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
-        >
-            <Head title="Log in" />
+        <AuthLayout title="Gestionnaire de Laptops" description="Entrez votre email et votre mot de passe ci-dessous pour vous connecter">
+            <Head title="Connexion" />
 
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
-                    {/* Email */}
+                    {/* Adresse e-mail */}
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+                        <Label htmlFor="email">Adresse e-mail</Label>
                         <Input
                             id="email"
                             type="email"
@@ -56,14 +54,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
+                            placeholder="email@exemple.com"
                         />
                         <InputError message={errors.email} />
                     </div>
 
-                    {/* Password */}
+                    {/* Mot de passe */}
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Mot de passe</Label>
                         <Input
                             id="password"
                             type="password"
@@ -72,48 +70,25 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             autoComplete="current-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                         />
                         <InputError message={errors.password} />
                     </div>
 
-                    {/* Remember me */}
-                    <div className="flex items-center space-x-3">
-                        <Checkbox
-                            id="remember"
-                            name="remember"
-                            checked={data.remember}
-                            onClick={() => setData('remember', !data.remember)}
-                            tabIndex={3}
-                        />
-                        <Label htmlFor="remember">Remember me</Label>
-                    </div>
-
-                    {/* Submit Button */}
+                    {/* Bouton de soumission */}
                     <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin mr-2" />}
-                        Log in
+                        {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
+                        Se connecter
                     </Button>
                 </div>
             </form>
 
-            {/* Status Message */}
-            {status && (
-                <div className="mt-6 text-center text-sm font-medium text-green-600">
-                    {status}
-                </div>
-            )}
+            {/* Message de statut */}
+            {status && <div className="mt-6 text-center text-sm font-medium text-green-600">{status}</div>}
 
-            {/* Forgot Password + Sign Up Links */}
+            {/* Liens Mot de passe oublié + Inscription */}
             <div className="mt-6 flex justify-between text-sm">
-                {canResetPassword && (
-                    <TextLink href={route('password.request')}>
-                        Forgot your password?
-                    </TextLink>
-                )}
-                <TextLink href={route('register')}>
-                    Don’t have an account? Sign up
-                </TextLink>
+                <TextLink href={route('register')}>Vous n'avez pas de compte ? Inscrivez-vous</TextLink>
             </div>
         </AuthLayout>
     );

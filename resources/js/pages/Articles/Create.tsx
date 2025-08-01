@@ -50,30 +50,30 @@ export default function Create({ fournisseurs }: CreateProps) {
 
     return (
         <AppLayout>
-            <Head title="Create Article" />
+            <Head title="Créer un article" />
 
-            {/* Consistent page background */}
+            {/* Arrière-plan de page uniforme */}
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {/* Modern card design with rounded corners and shadow */}
+                    {/* Design de carte moderne avec coins arrondis et ombre */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <div className="p-8"> {/* Increased padding */}
-                            {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Article</h1>
+                        <div className="p-8"> {/* Padding augmenté */}
+                            {/* Titre moderne */}
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer un nouvel article</h1>
 
                             <form onSubmit={handleSubmit}>
-                                {/* Grid layout for form fields, responsive */}
+                                {/* Grille de mise en page pour les champs du formulaire, responsive */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Article
+                                            Nom de l'article
                                         </label>
                                         <input
                                             id="nom_art"
                                             type="text"
                                             value={data.nom_art}
                                             onChange={(e) => setData('nom_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             autoFocus
                                             required
                                         />
@@ -89,7 +89,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             type="text"
                                             value={data.marque_art}
                                             onChange={(e) => setData('marque_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.marque_art && <p className="mt-2 text-sm text-red-600">{errors.marque_art}</p>}
@@ -97,7 +97,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="prix_achat_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Achat
+                                            Prix d'achat
                                         </label>
                                         <input
                                             id="prix_achat_art"
@@ -105,7 +105,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             step="0.01"
                                             value={data.prix_achat_art}
                                             onChange={(e) => setData('prix_achat_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.prix_achat_art && <p className="mt-2 text-sm text-red-600">{errors.prix_achat_art}</p>}
@@ -113,7 +113,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="prix_vente_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Vente
+                                            Prix de vente
                                         </label>
                                         <input
                                             id="prix_vente_art"
@@ -121,7 +121,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             step="0.01"
                                             value={data.prix_vente_art}
                                             onChange={(e) => setData('prix_vente_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.prix_vente_art && <p className="mt-2 text-sm text-red-600">{errors.prix_vente_art}</p>}
@@ -129,14 +129,14 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="date_achat_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Date Achat
+                                            Date d'achat
                                         </label>
                                         <input
                                             id="date_achat_art"
                                             type="date"
                                             value={data.date_achat_art}
                                             onChange={(e) => setData('date_achat_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                         />
                                         {errors.date_achat_art && <p className="mt-2 text-sm text-red-600">{errors.date_achat_art}</p>}
                                     </div>
@@ -151,7 +151,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             min="1"
                                             value={data.quantite_art}
                                             onChange={(e) => setData('quantite_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.quantite_art && <p className="mt-2 text-sm text-red-600">{errors.quantite_art}</p>}
@@ -165,7 +165,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             id="desc_art"
                                             value={data.desc_art}
                                             onChange={(e) => setData('desc_art', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             rows={3}
                                         />
                                         {errors.desc_art && <p className="mt-2 text-sm text-red-600">{errors.desc_art}</p>}
@@ -179,10 +179,10 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             id="nom_fourn"
                                             value={data.nom_fourn}
                                             onChange={(e) => setData('nom_fourn', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style de sélection moderne
                                             required
                                         >
-                                            <option value="">Select Fournisseur</option>
+                                            <option value="">Sélectionner un fournisseur</option>
                                             {fournisseurOptions.map((f) => (
                                                 <option key={f.nom_fourn} value={f.nom_fourn}>
                                                     {f.label}
@@ -193,20 +193,20 @@ export default function Create({ fournisseurs }: CreateProps) {
                                     </div>
                                 </div>
 
-                                {/* Action buttons */}
-                                <div className="flex items-center justify-end mt-8"> {/* Adjusted margin-top */}
+                                {/* Boutons d'action */}
+                                <div className="flex items-center justify-end mt-8"> {/* Marge supérieure ajustée */}
                                     <Link
                                         href={route('articles.index')}
-                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
+                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Bouton secondaire moderne
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
+                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Bouton principal moderne
                                     >
-                                        {processing ? 'Creating...' : 'Create Article'}
+                                        {processing ? 'Création en cours...' : 'Créer l\'article'}
                                     </button>
                                 </div>
                             </form>

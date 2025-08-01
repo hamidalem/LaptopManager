@@ -44,7 +44,7 @@ interface EditProps {
 
 export default function Edit({ facture, clients, laptops }: EditProps) {
     const { data, setData, put, processing, errors } = useForm<FactureLaptopForm>({
-        montant_facture_lap: facture.montant_facture_lap, // Initialize with current value, formatted
+        montant_facture_lap: facture.montant_facture_lap.toString(), // Initialize with current value, formatted
         date_facture_lap: facture.date_facture_lap,
         nom_client: facture.nom_client,
         id_lap: facture.id_lap.toString()
@@ -73,12 +73,12 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
         if (data.id_lap) {
             const selectedLaptop = laptops.find(l => l.id_lap.toString() === data.id_lap);
             if (selectedLaptop) {
-                setData('montant_facture_lap', selectedLaptop.prix_vente_lap); // Format to 2 decimal places
+                setData('montant_facture_lap', selectedLaptop.prix_vente_lap.toString());
             }
         } else {
             // Only clear if the current laptop selection is empty, otherwise retain original value
             // This prevents clearing if the user just loads the page with an existing laptop selected
-            if (data.montant_facture_lap !== facture.montant_facture_lap) {
+            if (data.montant_facture_lap !== facture.montant_facture_lap.toString()) {
                 setData('montant_facture_lap', '');
             }
         }
@@ -86,7 +86,7 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit Facture ${facture.id_facture_lap}`} />
+            <Head title={`Modifier la facture ${facture.id_facture_lap}`} />
 
             {/* Consistent page background */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -95,7 +95,7 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8"> {/* Increased padding */}
                             {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Facture Laptop</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier la facture de portable</h1>
 
                             <form onSubmit={handleSubmit}>
                                 {/* Grid layout for form fields, responsive */}
@@ -143,7 +143,7 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Client</option>
+                                            <option value="">Sélectionner un client</option>
                                             {clientOptions.map((c) => (
                                                 <option key={c.nom_client} value={c.nom_client}>
                                                     {c.label}
@@ -155,7 +155,7 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
 
                                     <div>
                                         <label htmlFor="id_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Laptop
+                                            Portable
                                         </label>
                                         <select
                                             id="id_lap"
@@ -164,7 +164,7 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Laptop</option>
+                                            <option value="">Sélectionner un portable</option>
                                             {laptopOptions.map((l) => (
                                                 <option key={l.id_lap} value={l.id_lap}>
                                                     {l.label}
@@ -181,14 +181,14 @@ export default function Edit({ facture, clients, laptops }: EditProps) {
                                         href={route('facture-laptops.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
                                     >
-                                        {processing ? 'Updating...' : 'Update Facture Laptop'}
+                                        {processing ? 'Mise à jour...' : 'Mettre à jour la facture de portable'}
                                     </button>
                                 </div>
                             </form>

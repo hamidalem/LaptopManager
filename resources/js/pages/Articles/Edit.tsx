@@ -59,6 +59,7 @@ export default function Edit({ article, fournisseurs }: EditProps) {
         put(route('articles.update', article.id_art));
     };
 
+    // Prepare options for the fournisseur dropdown
     const fournisseurOptions = fournisseurs.map(f => ({
         nom_fourn: f.nom_fourn,
         label: `${f.nom_fourn} (${f.num_tel_fourn})`
@@ -66,19 +67,19 @@ export default function Edit({ article, fournisseurs }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit ${article.nom_art}`} />
+            <Head title={`Modifier ${article.nom_art}`} />
 
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8">
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Article</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier l'article</h1>
 
                             <form onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Article
+                                            Nom de l'article
                                         </label>
                                         <input
                                             id="nom_art"
@@ -108,7 +109,7 @@ export default function Edit({ article, fournisseurs }: EditProps) {
 
                                     <div>
                                         <label htmlFor="prix_achat_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Achat
+                                            Prix d'achat
                                         </label>
                                         <input
                                             id="prix_achat_art"
@@ -124,7 +125,7 @@ export default function Edit({ article, fournisseurs }: EditProps) {
 
                                     <div>
                                         <label htmlFor="prix_vente_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Vente
+                                            Prix de vente
                                         </label>
                                         <input
                                             id="prix_vente_art"
@@ -140,7 +141,7 @@ export default function Edit({ article, fournisseurs }: EditProps) {
 
                                     <div>
                                         <label htmlFor="date_achat_art" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Date Achat
+                                            Date d'achat
                                         </label>
                                         <input
                                             id="date_achat_art"
@@ -210,7 +211,7 @@ export default function Edit({ article, fournisseurs }: EditProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         >
-                                            <option value="">Select Fournisseur</option>
+                                            <option value="">Sélectionner un fournisseur</option>
                                             {fournisseurOptions.map((f) => (
                                                 <option key={f.nom_fourn} value={f.nom_fourn}>
                                                     {f.label}
@@ -226,14 +227,14 @@ export default function Edit({ article, fournisseurs }: EditProps) {
                                         href={route('articles.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Updating...' : 'Update Article'}
+                                        {processing ? 'Mise à jour en cours...' : 'Mettre à jour l\'article'}
                                     </button>
                                 </div>
                             </form>

@@ -32,7 +32,7 @@ interface IndexProps {
 export default function Index({ factures }: IndexProps) {
     return (
         <AppLayout>
-            <Head title="Facture Reparations" />
+            <Head title="Factures de réparation" />
 
             {/* Consistent page background and padding */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -42,12 +42,12 @@ export default function Index({ factures }: IndexProps) {
                         <div className="p-8"> {/* Increased padding */}
                             {/* Header section with title and add button */}
                             <div className="flex justify-between items-center mb-8">
-                                <h1 className="text-3xl font-extrabold text-gray-900">Facture Reparations Management</h1>
+                                <h1 className="text-3xl font-extrabold text-gray-900">Gestion des factures de réparation</h1>
                                 <Link
                                     href={route('facture-reparations.create')}
                                     className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105"
                                 >
-                                    + Add New Facture
+                                    + Ajouter une nouvelle facture
                                 </Link>
                             </div>
 
@@ -61,7 +61,7 @@ export default function Index({ factures }: IndexProps) {
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Montant</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Date</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Client</th>
-                                        <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Reparation</th>
+                                        <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Réparation</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider rounded-tr-lg">Actions</th>
                                     </tr>
                                     </thead>
@@ -80,28 +80,28 @@ export default function Index({ factures }: IndexProps) {
                                                     {facture.reparation ? facture.reparation.nom_repar : 'N/A'}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
+
+                                                    {/* Show Button */}
+                                                    <Link
+                                                        href={route('facture-reparations.show', facture.id_facture_repar)}
+                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out mr-2"
+                                                    >
+                                                        Détails
+                                                    </Link>
                                                     <Link
                                                         href={route('facture-reparations.edit', facture.id_facture_repar)}
                                                         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out mr-2"
                                                     >
-                                                        Edit
+                                                        Modifier
                                                     </Link>
-                                                    <Link
-                                                        method="delete"
-                                                        href={route('facture-reparations.destroy', facture.id_facture_repar)}
-                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"
-                                                        as="button"
-                                                        type="button"
-                                                    >
-                                                        Delete
-                                                    </Link>
+
                                                 </td>
                                             </tr>
                                         ))
                                     ) : (
                                         <tr>
                                             <td colSpan={6} className="px-6 py-10 text-center text-xl text-gray-500 font-medium">
-                                                No facture reparations found. Please add a new one to get started!
+                                                Aucune facture de réparation trouvée. Veuillez en ajouter une nouvelle pour commencer !
                                             </td>
                                         </tr>
                                     )}
@@ -115,4 +115,3 @@ export default function Index({ factures }: IndexProps) {
         </AppLayout>
     );
 }
-

@@ -1,26 +1,22 @@
 import React, { useEffect } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
-import AppLayout from '@/layouts/app-layout'; // Ensure AppLayout is used
+import AppLayout from '@/layouts/app-layout';
 
-// Define the Client interface for the dropdown options
 interface Client {
     nom_client: string;
-    num_tel_client: string; // Assuming phone number can be a string
-    // Add other relevant fields for Client if they exist in your data structure
+    num_tel_client: string;
 }
 
-// Define the Laptop interface for the dropdown options
 interface Laptop {
     id_lap: string;
     nom_lap: string;
     marque_lap: string;
-    prix_vente_lap: number; // Used for auto-filling montant
-    // Add other relevant fields for Laptop if they exist in your data structure
+    prix_vente_lap: number;
+    etat_lap: string; // Add this field
 }
 
-// Define the FactureLaptopForm interface for the form data
 interface FactureLaptopForm {
-    montant_facture_lap: string; // Use string for form input
+    montant_facture_lap: string;
     date_facture_lap: string;
     nom_client: string;
     id_lap: string;
@@ -44,47 +40,46 @@ export default function Create({ clients, laptops }: CreateProps) {
         post(route('facture-laptops.store'));
     };
 
-    // Prepare options for the client dropdown
     const clientOptions = clients.map(c => ({
         nom_client: c.nom_client,
         label: `${c.nom_client} (${c.num_tel_client})`
     }));
 
-    // Prepare options for the laptop dropdown
-    const laptopOptions = laptops.map(l => ({
+    // Filtrer les portables pour n'afficher que ceux qui sont disponibles
+    const availableLaptops = laptops.filter(l => l.etat_lap === 'disponible');
+
+    const laptopOptions = availableLaptops.map(l => ({
         id_lap: l.id_lap,
-        label: `${l.nom_lap} (${l.marque_lap})`,
+        label: `${l.nom_lap} (${l.marque_lap}) - ${l.prix_vente_lap} DA`,
         prix_vente_lap: l.prix_vente_lap
     }));
 
-    // Auto-fill montant_facture_lap when laptop is selected
     useEffect(() => {
         if (data.id_lap) {
-            const selectedLaptop = laptops.find(l => l.id_lap.toString() === data.id_lap);
+            const selectedLaptop = availableLaptops.find(l => l.id_lap.toString() === data.id_lap);
             if (selectedLaptop) {
-                setData('montant_facture_lap', selectedLaptop.prix_vente_lap); // Format to 2 decimal places
+                // Mettre à jour le montant uniquement si la valeur est différente pour éviter les re-rendus inutiles
+                if (data.montant_facture_lap !== selectedLaptop.prix_vente_lap.toString()) {
+                    setData('montant_facture_lap', selectedLaptop.prix_vente_lap.toString());
+                }
             }
-        } else {
-            setData('montant_facture_lap', ''); // Clear if no laptop is selected
+        } else if (data.montant_facture_lap !== '') {
+            setData('montant_facture_lap', '');
         }
-    }, [data.id_lap, laptops, setData]); // Added setData to dependency array
+    }, [data.id_lap]); // Dépend uniquement de data.id_lap
 
     return (
         <AppLayout>
-            <Head title="Create Facture Laptop" />
-
-            {/* Consistent page background */}
+            <Head title="Créer une facture de portable" />
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {/* Modern card design with rounded corners and shadow */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <div className="p-8"> {/* Increased padding */}
-                            {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Facture Laptop</h1>
+                        <div className="p-8">
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer une nouvelle facture de portable</h1>
 
                             <form onSubmit={handleSubmit}>
-                                {/* Grid layout for form fields, responsive */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                                    {/* Champ Montant */}
                                     <div>
                                         <label htmlFor="montant_facture_lap" className="block text-sm font-medium text-gray-700 mb-1">
                                             Montant
@@ -94,14 +89,14 @@ export default function Create({ clients, laptops }: CreateProps) {
                                             type="number"
                                             step="0.01"
                                             value={data.montant_facture_lap}
-                                            // Allow manual override if needed, but keep readOnly for default behavior
                                             onChange={(e) => setData('montant_facture_lap', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 bg-gray-100 cursor-not-allowed" // Modern input style, disabled appearance
-                                            readOnly // Keep readOnly as per original logic
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 bg-gray-100 cursor-not-allowed"
+                                            readOnly
                                         />
                                         {errors.montant_facture_lap && <p className="mt-2 text-sm text-red-600">{errors.montant_facture_lap}</p>}
                                     </div>
 
+                                    {/* Champ Date */}
                                     <div>
                                         <label htmlFor="date_facture_lap" className="block text-sm font-medium text-gray-700 mb-1">
                                             Date
@@ -111,12 +106,13 @@ export default function Create({ clients, laptops }: CreateProps) {
                                             type="date"
                                             value={data.date_facture_lap}
                                             onChange={(e) => setData('date_facture_lap', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         />
                                         {errors.date_facture_lap && <p className="mt-2 text-sm text-red-600">{errors.date_facture_lap}</p>}
                                     </div>
 
+                                    {/* Champ Client */}
                                     <div>
                                         <label htmlFor="nom_client" className="block text-sm font-medium text-gray-700 mb-1">
                                             Client
@@ -125,10 +121,10 @@ export default function Create({ clients, laptops }: CreateProps) {
                                             id="nom_client"
                                             value={data.nom_client}
                                             onChange={(e) => setData('nom_client', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         >
-                                            <option value="">Select Client</option>
+                                            <option value="">Sélectionner un client</option>
                                             {clientOptions.map((c) => (
                                                 <option key={c.nom_client} value={c.nom_client}>
                                                     {c.label}
@@ -138,18 +134,19 @@ export default function Create({ clients, laptops }: CreateProps) {
                                         {errors.nom_client && <p className="mt-2 text-sm text-red-600">{errors.nom_client}</p>}
                                     </div>
 
+                                    {/* Champ Portable - N'affiche que les portables disponibles */}
                                     <div>
                                         <label htmlFor="id_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Laptop
+                                            Portables disponibles
                                         </label>
                                         <select
                                             id="id_lap"
                                             value={data.id_lap}
                                             onChange={(e) => setData('id_lap', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         >
-                                            <option value="">Select Laptop</option>
+                                            <option value="">Sélectionner un portable</option>
                                             {laptopOptions.map((l) => (
                                                 <option key={l.id_lap} value={l.id_lap}>
                                                     {l.label}
@@ -160,20 +157,19 @@ export default function Create({ clients, laptops }: CreateProps) {
                                     </div>
                                 </div>
 
-                                {/* Action buttons */}
-                                <div className="flex items-center justify-end mt-8"> {/* Adjusted margin-top */}
+                                <div className="flex items-center justify-end mt-8">
                                     <Link
                                         href={route('facture-laptops.index')}
-                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
+                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
+                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Creating...' : 'Create Facture Laptop'}
+                                        {processing ? 'Création en cours...' : 'Créer une facture de portable'}
                                     </button>
                                 </div>
                             </form>

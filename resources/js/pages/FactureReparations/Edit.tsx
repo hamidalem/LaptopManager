@@ -43,7 +43,7 @@ interface EditProps {
 
 export default function Edit({ facture, clients, reparations }: EditProps) {
     const { data, setData, put, processing, errors } = useForm<FactureReparationForm>({
-        montant_facture_repar: facture.montant_facture_repar, // Initialize with current value, formatted
+        montant_facture_repar: facture.montant_facture_repar.toString(), // Initialize with current value, formatted
         date_facture_repar: facture.date_facture_repar,
         nom_client: facture.nom_client,
         id_repar: facture.id_repar.toString()
@@ -71,7 +71,7 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit Facture ${facture.id_facture_repar}`} />
+            <Head title={`Modifier la facture ${facture.id_facture_repar}`} />
 
             {/* Consistent page background */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -80,7 +80,7 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8"> {/* Increased padding */}
                             {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Facture Reparation</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier la facture de réparation</h1>
 
                             <form onSubmit={handleSubmit}>
                                 {/* Grid layout for form fields, responsive */}
@@ -95,8 +95,8 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
                                             step="0.01"
                                             value={data.montant_facture_repar}
                                             onChange={(e) => setData('montant_facture_repar', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Removed disabled styling
-                                            required // Added required as it's a critical field
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
+                                            required
                                         />
                                         {errors.montant_facture_repar && <p className="mt-2 text-sm text-red-600">{errors.montant_facture_repar}</p>}
                                     </div>
@@ -110,7 +110,7 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
                                             type="date"
                                             value={data.date_facture_repar}
                                             onChange={(e) => setData('date_facture_repar', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         />
                                         {errors.date_facture_repar && <p className="mt-2 text-sm text-red-600">{errors.date_facture_repar}</p>}
@@ -124,10 +124,10 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
                                             id="nom_client"
                                             value={data.nom_client}
                                             onChange={(e) => setData('nom_client', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         >
-                                            <option value="">Select Client</option>
+                                            <option value="">Sélectionner un client</option>
                                             {clientOptions.map((c) => (
                                                 <option key={c.nom_client} value={c.nom_client}>
                                                     {c.label}
@@ -139,16 +139,16 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
 
                                     <div>
                                         <label htmlFor="id_repar" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Reparation
+                                            Réparation
                                         </label>
                                         <select
                                             id="id_repar"
                                             value={data.id_repar}
                                             onChange={(e) => setData('id_repar', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
                                             required
                                         >
-                                            <option value="">Select Reparation</option>
+                                            <option value="">Sélectionner une réparation</option>
                                             {reparationOptions.map((r) => (
                                                 <option key={r.id_repar} value={r.id_repar}>
                                                     {r.label}
@@ -160,19 +160,19 @@ export default function Edit({ facture, clients, reparations }: EditProps) {
                                 </div>
 
                                 {/* Action buttons */}
-                                <div className="flex items-center justify-end mt-8"> {/* Adjusted margin-top */}
+                                <div className="flex items-center justify-end mt-8">
                                     <Link
                                         href={route('facture-reparations.index')}
-                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
+                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
+                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Updating...' : 'Update Facture Reparation'}
+                                        {processing ? 'Mise à jour...' : 'Mettre à jour la facture de réparation'}
                                     </button>
                                 </div>
                             </form>

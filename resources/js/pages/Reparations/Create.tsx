@@ -40,7 +40,7 @@ export default function Create({ reparateurs }: CreateProps) {
 
     return (
         <AppLayout>
-            <Head title="Create Reparation" />
+            <Head title="Créer une réparation" />
 
             {/* Consistent page background */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -49,14 +49,14 @@ export default function Create({ reparateurs }: CreateProps) {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8"> {/* Increased padding */}
                             {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Reparation</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer une nouvelle réparation</h1>
 
                             <form onSubmit={handleSubmit}>
                                 {/* Grid layout for form fields */}
                                 <div className="grid grid-cols-1 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_repar" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Reparation
+                                            Nom de la réparation
                                         </label>
                                         <input
                                             id="nom_repar"
@@ -86,7 +86,7 @@ export default function Create({ reparateurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="nom_rep" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Reparateur
+                                            Réparateur
                                         </label>
                                         <select
                                             id="nom_rep"
@@ -95,7 +95,7 @@ export default function Create({ reparateurs }: CreateProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Reparateur</option>
+                                            <option value="">Sélectionnez un réparateur</option>
                                             {reparateurOptions.map((r) => (
                                                 <option key={r.nom_rep} value={r.nom_rep}>
                                                     {r.label}
@@ -112,14 +112,14 @@ export default function Create({ reparateurs }: CreateProps) {
                                         href={route('reparations.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
                                     >
-                                        {processing ? 'Creating...' : 'Create Reparation'}
+                                        {processing ? 'Création en cours...' : 'Créer la réparation'}
                                     </button>
                                 </div>
                             </form>

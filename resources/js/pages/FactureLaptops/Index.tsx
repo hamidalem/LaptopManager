@@ -35,38 +35,32 @@ export default function Index({ factures }: IndexProps) {
         <AppLayout>
             <Head title="Facture Laptops" />
 
-            {/* Consistent page background and padding */}
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="w-full mx-auto sm:px-6 lg:px-8">
-                    {/* Main content container with rounded corners and shadow */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <div className="p-8"> {/* Increased padding */}
-                            {/* Header section with title and add button */}
+                        <div className="p-8">
                             <div className="flex justify-between items-center mb-8">
-                                <h1 className="text-3xl font-extrabold text-gray-900">Facture Laptops Management</h1>
+                                <h1 className="text-3xl font-extrabold text-gray-900">Gestion des factures de portables</h1>
                                 <Link
                                     href={route('facture-laptops.create')}
                                     className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105"
                                 >
-                                    + Add New Facture
+                                    + Ajouter une nouvelle facture
                                 </Link>
                             </div>
 
-                            {/* Table container with stronger shadow and border */}
                             <div className="overflow-x-auto rounded-lg shadow-xl border border-gray-200">
                                 <table className="min-w-full divide-y divide-gray-300">
-                                    {/* Table header with solid blue background */}
                                     <thead className="bg-blue-600">
                                     <tr>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider rounded-tl-lg">ID</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Montant</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Date</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Client</th>
-                                        <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Laptop</th>
+                                        <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider">Portable</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider rounded-tr-lg">Actions</th>
                                     </tr>
                                     </thead>
-                                    {/* Table body with alternating row colors and distinct hover */}
                                     <tbody className="bg-white divide-y divide-gray-100">
                                     {factures.length > 0 ? (
                                         factures.map((facture, index) => (
@@ -80,29 +74,30 @@ export default function Index({ factures }: IndexProps) {
                                                 <td className="px-6 py-4 whitespace-nowrap text-base text-gray-800">
                                                     {facture.laptop ? `${facture.laptop.nom_lap} (${facture.laptop.marque_lap})` : 'N/A'}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                                    {/* Show Button */}
+                                                    <Link
+                                                        href={route('facture-laptops.show', facture.id_facture_lap)}
+                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out"
+                                                    >
+                                                        Afficher
+                                                    </Link>
+                                                    {/* Edit Button */}
                                                     <Link
                                                         href={route('facture-laptops.edit', facture.id_facture_lap)}
-                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out mr-2"
+                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
                                                     >
-                                                        Edit
+                                                        Modifier
                                                     </Link>
-                                                    <Link
-                                                        method="delete"
-                                                        href={route('facture-laptops.destroy', facture.id_facture_lap)}
-                                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"
-                                                        as="button"
-                                                        type="button"
-                                                    >
-                                                        Delete
-                                                    </Link>
+
+
                                                 </td>
                                             </tr>
                                         ))
                                     ) : (
                                         <tr>
                                             <td colSpan={6} className="px-6 py-10 text-center text-xl text-gray-500 font-medium">
-                                                No facture laptops found. Please add a new one to get started!
+                                                Aucune facture de portable trouvée. Veuillez en ajouter une nouvelle pour commencer !
                                             </td>
                                         </tr>
                                     )}

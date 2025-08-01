@@ -34,26 +34,26 @@ export default function Edit({ reparateur }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit ${reparateur.nom_rep}`} />
+            <Head title={`Modifier le réparateur ${reparateur.nom_rep}`} />
 
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8">
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Reparateur</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier le réparateur</h1>
 
                             <form onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_rep" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Reparateur
+                                            Nom du réparateur
                                         </label>
                                         <input
                                             id="nom_rep"
                                             type="text"
                                             value={data.nom_rep}
                                             onChange={(e) => setData('nom_rep', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 bg-gray-100 cursor-not-allowed"
                                             required
                                             readOnly // Assuming nom_rep is a primary key and shouldn't be changed after creation
                                         />
@@ -62,7 +62,7 @@ export default function Edit({ reparateur }: EditProps) {
 
                                     <div>
                                         <label htmlFor="num_tel_rep" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Numéro Téléphone
+                                            Numéro de téléphone
                                         </label>
                                         <input
                                             id="num_tel_rep"
@@ -96,14 +96,14 @@ export default function Edit({ reparateur }: EditProps) {
                                         href={route('reparateurs.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Updating...' : 'Update Reparateur'}
+                                        {processing ? 'Mise à jour...' : 'Mettre à jour le réparateur'}
                                     </button>
                                 </div>
                             </form>

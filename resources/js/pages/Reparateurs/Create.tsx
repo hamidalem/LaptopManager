@@ -10,31 +10,37 @@ interface ReparateurForm {
 }
 
 export default function Create() {
+    // Initialize the form state with the useForm hook from Inertia.js
     const { data, setData, post, processing, errors } = useForm<ReparateurForm>({
         nom_rep: '',
         num_tel_rep: '',
         adresse_rep: ''
     });
 
+    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        // Post the form data to the 'reparateurs.store' route
         post(route('reparateurs.store'));
     };
 
     return (
         <AppLayout>
-            <Head title="Create Reparateur" />
+            {/* Set the page title */}
+            <Head title="Créer un réparateur" />
 
+            {/* Main content container with consistent styling */}
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8">
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Reparateur</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer un nouveau réparateur</h1>
 
                             <form onSubmit={handleSubmit}>
+                                {/* Grid layout for form fields */}
                                 <div className="grid grid-cols-1 gap-6 mt-4">
                                     <div>
-                                        <label htmlFor="nom_rep" className="block text-sm font-medium text-gray-700 mb-1">Nom Reparateur</label>
+                                        <label htmlFor="nom_rep" className="block text-sm font-medium text-gray-700 mb-1">Nom du réparateur</label>
                                         <input
                                             id="nom_rep"
                                             type="text"
@@ -49,7 +55,7 @@ export default function Create() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="num_tel_rep" className="block text-sm font-medium text-gray-700 mb-1">Numéro Téléphone</label>
+                                        <label htmlFor="num_tel_rep" className="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone</label>
                                         <input
                                             id="num_tel_rep"
                                             type="tel" // Changed to tel for phone numbers
@@ -77,19 +83,20 @@ export default function Create() {
                                     </div>
                                 </div>
 
+                                {/* Action buttons */}
                                 <div className="flex justify-end mt-8">
                                     <Link
                                         href={route('reparateurs.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Creating...' : 'Create Reparateur'}
+                                        {processing ? 'Création en cours...' : 'Créer le réparateur'}
                                     </button>
                                 </div>
                             </form>

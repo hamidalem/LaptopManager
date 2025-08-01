@@ -23,30 +23,30 @@ export default function Create() {
 
     return (
         <AppLayout>
-            <Head title="Create Client" />
+            <Head title="Créer un client" />
 
-            {/* Consistent page background */}
+            {/* Arrière-plan de page uniforme */}
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {/* Modern card design with rounded corners and shadow */}
+                    {/* Design de carte moderne avec coins arrondis et ombre */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <div className="p-8"> {/* Increased padding */}
-                            {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Client</h1>
+                        <div className="p-8"> {/* Padding augmenté */}
+                            {/* Titre moderne */}
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer un nouveau client</h1>
 
                             <form onSubmit={handleSubmit}>
-                                {/* Grid layout for form fields */}
+                                {/* Grille de mise en page pour les champs du formulaire */}
                                 <div className="grid grid-cols-1 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_client" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Client
+                                            Nom du client
                                         </label>
                                         <input
                                             id="nom_client"
                                             type="text"
                                             value={data.nom_client}
                                             onChange={(e) => setData('nom_client', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             autoFocus
                                             required
                                         />
@@ -55,14 +55,14 @@ export default function Create() {
 
                                     <div>
                                         <label htmlFor="num_tel_client" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Numéro Téléphone
+                                            Numéro de téléphone
                                         </label>
                                         <input
                                             id="num_tel_client"
                                             type="tel" // Use type="tel" for phone numbers
                                             value={data.num_tel_client}
                                             onChange={(e) => setData('num_tel_client', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.num_tel_client && <p className="mt-2 text-sm text-red-600">{errors.num_tel_client}</p>}
@@ -77,27 +77,27 @@ export default function Create() {
                                             type="text"
                                             value={data.adresse_client}
                                             onChange={(e) => setData('adresse_client', e.target.value)}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern input style
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Style d'entrée moderne
                                             required
                                         />
                                         {errors.adresse_client && <p className="mt-2 text-sm text-red-600">{errors.adresse_client}</p>}
                                     </div>
                                 </div>
 
-                                {/* Action buttons */}
-                                <div className="flex items-center justify-end mt-8"> {/* Adjusted margin-top */}
+                                {/* Boutons d'action */}
+                                <div className="flex items-center justify-end mt-8"> {/* Marge supérieure ajustée */}
                                     <Link
                                         href={route('clients.index')}
-                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
+                                        className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Bouton secondaire moderne
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
+                                        className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Bouton principal moderne
                                     >
-                                        {processing ? 'Creating...' : 'Create Client'}
+                                        {processing ? 'Création en cours...' : 'Créer le client'}
                                     </button>
                                 </div>
                             </form>

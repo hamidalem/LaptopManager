@@ -34,19 +34,19 @@ export default function Edit({ client }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit ${client.nom_client}`} />
+            <Head title={`Modifier ${client.nom_client}`} />
 
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8">
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Client</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier le client</h1>
 
                             <form onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_client" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Client
+                                            Nom du client
                                         </label>
                                         <input
                                             id="nom_client"
@@ -62,7 +62,7 @@ export default function Edit({ client }: EditProps) {
 
                                     <div>
                                         <label htmlFor="num_tel_client" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Numéro Téléphone
+                                            Numéro de téléphone
                                         </label>
                                         <input
                                             id="num_tel_client"
@@ -96,14 +96,14 @@ export default function Edit({ client }: EditProps) {
                                         href={route('clients.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out"
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
                                     >
-                                        {processing ? 'Updating...' : 'Update Client'}
+                                        {processing ? 'Mise à jour en cours...' : 'Mettre à jour le client'}
                                     </button>
                                 </div>
                             </form>

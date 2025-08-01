@@ -50,7 +50,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
     return (
         <AppLayout>
-            <Head title="Create Laptop" />
+            <Head title="Créer un ordinateur portable" />
 
             {/* Consistent page background */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -59,14 +59,14 @@ export default function Create({ fournisseurs }: CreateProps) {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8"> {/* Increased padding */}
                             {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Create New Laptop</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Créer un nouvel ordinateur portable</h1>
 
                             <form onSubmit={handleSubmit}>
                                 {/* Grid layout for form fields, responsive */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                                     <div>
                                         <label htmlFor="nom_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Nom Laptop
+                                            Nom de l'ordinateur portable
                                         </label>
                                         <input
                                             id="nom_lap"
@@ -96,7 +96,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="prix_achat_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Achat
+                                            Prix d'achat
                                         </label>
                                         <input
                                             id="prix_achat_lap"
@@ -112,7 +112,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="prix_vente_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Prix Vente
+                                            Prix de vente
                                         </label>
                                         <input
                                             id="prix_vente_lap"
@@ -128,7 +128,7 @@ export default function Create({ fournisseurs }: CreateProps) {
 
                                     <div>
                                         <label htmlFor="date_achat_lap" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Date Achat
+                                            Date d'achat
                                         </label>
                                         <input
                                             id="date_achat_lap"
@@ -181,7 +181,7 @@ export default function Create({ fournisseurs }: CreateProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Fournisseur</option>
+                                            <option value="">Sélectionnez un fournisseur</option>
                                             {fournisseurOptions.map((f) => (
                                                 <option key={f.nom_fourn} value={f.nom_fourn}>
                                                     {f.label}
@@ -198,14 +198,14 @@ export default function Create({ fournisseurs }: CreateProps) {
                                         href={route('laptops.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
                                     >
-                                        {processing ? 'Creating...' : 'Create Laptop'}
+                                        {processing ? 'Création en cours...' : 'Créer l\'ordinateur portable'}
                                     </button>
                                 </div>
                             </form>

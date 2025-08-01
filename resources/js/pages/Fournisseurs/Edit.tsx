@@ -21,13 +21,13 @@ export default function Edit({ fournisseur }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit ${fournisseur.nom_fourn}`} />
+            <Head title={`Modifier le fournisseur ${fournisseur.nom_fourn}`} />
 
             <div className="min-h-screen bg-gray-100 py-12"> {/* Modern page background */}
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden"> {/* Modern card design */}
                         <div className="p-8"> {/* Increased padding */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Fournisseur</h1> {/* Modern heading */}
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier le fournisseur</h1> {/* Modern heading */}
 
                             <form onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 gap-6 mt-4">
@@ -85,14 +85,14 @@ export default function Edit({ fournisseur }: EditProps) {
                                         href={route('fournisseurs.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
                                     >
-                                        {processing ? 'Updating...' : 'Update Fournisseur'}
+                                        {processing ? 'Mise à jour...' : 'Mettre à jour le fournisseur'}
                                     </button>
                                 </div>
                             </form>

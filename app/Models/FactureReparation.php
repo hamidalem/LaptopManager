@@ -30,8 +30,10 @@ class FactureReparation extends Model
         return $this->belongsTo(Client::class, 'nom_client', 'nom_client');
     }
 
+
     public function reparation()
     {
         return $this->belongsTo(Reparation::class, 'id_repar', 'id_repar');
     }
+
 }

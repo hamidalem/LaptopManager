@@ -44,10 +44,10 @@ interface EditProps {
 
 export default function Edit({ facture, clients, articles }: EditProps) {
     const { data, setData, put, processing, errors } = useForm<FactureArticleForm>({
-        montant_facture_art: facture.montant_facture_art, // Initialize with current value, formatted
+        montant_facture_art: facture.montant_facture_art.toString(), // Initialize with current value, formatted
         date_facture_art: facture.date_facture_art,
         nom_client: facture.nom_client,
-        id_art: facture.id_art.toString()
+        id_art: facture.id_art
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -71,14 +71,14 @@ export default function Edit({ facture, clients, articles }: EditProps) {
     // Auto-fill montant_facture_art when article is selected, similar to Create page
     useEffect(() => {
         if (data.id_art) {
-            const selectedArticle = articles.find(a => a.id_art.toString() === data.id_art);
+            const selectedArticle = articles.find(a => a.id_art === data.id_art);
             if (selectedArticle) {
-                setData('montant_facture_art', selectedArticle.prix_vente_art); // Format to 2 decimal places
+                setData('montant_facture_art', selectedArticle.prix_vente_art.toString()); // Format to 2 decimal places
             }
         } else {
             // Only clear if the current article selection is empty, otherwise retain original value
             // This prevents clearing if the user just loads the page with an existing article selected
-            if (data.montant_facture_art !== facture.montant_facture_art) {
+            if (data.montant_facture_art !== facture.montant_facture_art.toString()) {
                 setData('montant_facture_art', '');
             }
         }
@@ -86,7 +86,7 @@ export default function Edit({ facture, clients, articles }: EditProps) {
 
     return (
         <AppLayout>
-            <Head title={`Edit Facture ${facture.id_facture_art}`} />
+            <Head title={`Modifier Facture ${facture.id_facture_art}`} />
 
             {/* Consistent page background */}
             <div className="min-h-screen bg-gray-100 py-12">
@@ -95,7 +95,7 @@ export default function Edit({ facture, clients, articles }: EditProps) {
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-8"> {/* Increased padding */}
                             {/* Modern heading */}
-                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Edit Facture Article</h1>
+                            <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Modifier la facture de l'article</h1>
 
                             <form onSubmit={handleSubmit}>
                                 {/* Grid layout for form fields, responsive */}
@@ -143,7 +143,7 @@ export default function Edit({ facture, clients, articles }: EditProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Client</option>
+                                            <option value="">Sélectionner un client</option>
                                             {clientOptions.map((c) => (
                                                 <option key={c.nom_client} value={c.nom_client}>
                                                     {c.label}
@@ -164,7 +164,7 @@ export default function Edit({ facture, clients, articles }: EditProps) {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3" // Modern select style
                                             required
                                         >
-                                            <option value="">Select Article</option>
+                                            <option value="">Sélectionner un article</option>
                                             {articleOptions.map((a) => (
                                                 <option key={a.id_art} value={a.id_art}>
                                                     {a.label}
@@ -181,14 +181,14 @@ export default function Edit({ facture, clients, articles }: EditProps) {
                                         href={route('facture-articles.index')}
                                         className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg shadow-sm hover:bg-gray-300 transition duration-300 ease-in-out" // Modern secondary button
                                     >
-                                        Cancel
+                                        Annuler
                                     </Link>
                                     <button
                                         type="submit"
                                         disabled={processing}
                                         className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50" // Modern primary button
                                     >
-                                        {processing ? 'Updating...' : 'Update Facture Article'}
+                                        {processing ? 'Mise à jour en cours...' : 'Mettre à jour la facture de l\'article'}
                                     </button>
                                 </div>
                             </form>
